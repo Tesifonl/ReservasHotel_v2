@@ -22,7 +22,7 @@ public class Huesped {
 	
 	private String formateaNombre(String nombre) {
 		
-		String[] formatoNombre=nombre.split("\\s ");
+		String[] formatoNombre=nombre.split(" ");
 		nombre="";
 		
 		for (int i=0;i<formatoNombre.length;i++) 
@@ -84,7 +84,7 @@ public class Huesped {
 
 	public void setCorreo(String correo) {
 		if (correo==null) {
-			throw new NullPointerException("ERROR: El correo de un huesped no puede ser nulo.");}
+			throw new NullPointerException("ERROR: El correo de un hu�sped no puede ser nulo.");}
 		else if (correo.trim().equals("")) { 
 			throw new IllegalArgumentException("ERROR: El correo del hu�sped no tiene un formato v�lido.");}
 		else if (!correo.trim().matches(ER_CORREO)) {
