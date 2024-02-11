@@ -26,6 +26,13 @@ public class Reservas {
 		return copia;
 	}
 	
+	public int getTamano() {
+		
+		int tamano=0;
+		ArrayList<Reserva> copia=copiaProfundaReservas();
+		return tamano=copia.size();
+	}
+	
 	
 	private ArrayList<Reserva> copiaProfundaReservas() {
 		ArrayList<Reserva> copiaReservas=new ArrayList<Reserva>();
