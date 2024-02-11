@@ -2,6 +2,7 @@ package org.iesalandalus.programacion.reservashotel.modelo.dominio;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.Objects;
 
 public class Huesped {
@@ -172,7 +173,6 @@ public class Huesped {
 	public String toString() {
 		return "nombre=" + nombre+ " ("+getIniciales(nombre) +")" + ", DNI=" + dni+ ", correo=" + correo + ", tel�fono=" + telefono+ ", fecha nacimiento=" + fechaNacimiento.format(formatoFechaString) ;
 	}
-	
 
-	
+
 }

@@ -1,6 +1,7 @@
 package org.iesalandalus.programacion.reservashotel.controlador;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import javax.naming.OperationNotSupportedException;
 
@@ -51,7 +52,7 @@ public class Controlador {
 			System.out.println(ex.getMessage());}
 	}
 	
-	public Huesped [] getHuespedes(){
+	public ArrayList<Huesped> getHuespedes(){
 		return modelo.getHuespedes();
 	}
 	
@@ -73,11 +74,11 @@ public class Controlador {
 			System.out.println(ex.getMessage());}
 	}
 	
-	public Habitacion [] getHabitaciones() {
+	public ArrayList<Habitacion> getHabitaciones() {
 		return modelo.getHabitaciones();
 	}
 	
-	public Habitacion [] getHabitaciones(TipoHabitacion tipoHabitacion) {
+	public ArrayList<Habitacion> getHabitaciones(TipoHabitacion tipoHabitacion) {
 		return modelo.getHabitaciones(tipoHabitacion);
 	}
 	
@@ -99,15 +100,15 @@ public class Controlador {
 			System.out.println(ex.getMessage());}
 		}
 	
-	public Reserva [] getReservas() {
+	public ArrayList<Reserva> getReservas() {
 		return modelo.getReservas();
 	}
 	
-	public Reserva [] getReservas(Huesped huesped) {
+	public ArrayList<Reserva> getReservas(Huesped huesped) {
 		return modelo.getReservas(huesped);
 	}
 	
-	public Reserva [] getReservas(TipoHabitacion tipoHabitacion) {
+	public ArrayList<Reserva> getReservas(TipoHabitacion tipoHabitacion) {
 		return modelo.getReservas(tipoHabitacion);
 	}
 	

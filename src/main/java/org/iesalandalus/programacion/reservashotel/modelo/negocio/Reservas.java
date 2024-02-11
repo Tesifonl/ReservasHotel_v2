@@ -2,6 +2,7 @@ package org.iesalandalus.programacion.reservashotel.modelo.negocio;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import javax.naming.OperationNotSupportedException;
 
@@ -11,111 +12,60 @@ import org.iesalandalus.programacion.reservashotel.modelo.dominio.Reserva;
 import org.iesalandalus.programacion.reservashotel.modelo.dominio.TipoHabitacion;
 
 public class Reservas {
+
+	private static ArrayList<Reserva> coleccionReservas;
 	
-	private int capacidad;
-	private int tamano;
-	private static Reserva [] coleccionReservas;
-	
-	public Reservas (int capacidad) {
-		if(capacidad>0) {
-			this.capacidad=capacidad;
-			coleccionReservas=new Reserva [capacidad];
-		}else {throw new IllegalArgumentException("ERROR: La capacidad debe ser mayor que cero.");}
+	public Reservas () {
+		
+		coleccionReservas=new ArrayList<Reserva>();
 	}
 	
 
-	public Reserva [] get() {
-		Reserva[] copia=copiaProfundaReservas();
+	public ArrayList<Reserva> get() {
+		ArrayList<Reserva> copia=copiaProfundaReservas();
 		return copia;
 	}
 	
 	
-	private Reserva [] copiaProfundaReservas() {
-		Reserva [] copiaReservas=new Reserva [coleccionReservas.length];
+	private ArrayList<Reserva> copiaProfundaReservas() {
+		ArrayList<Reserva> copiaReservas=new ArrayList<Reserva>();
 		
-		for (int i=0;i<coleccionReservas.length;i++) {
-			if (coleccionReservas[i]!=null) {
-				copiaReservas[i]=new Reserva(coleccionReservas[i]);}
-			else {
-				copiaReservas[i]=null;}
+		for (int i=0;i<coleccionReservas.size();i++) {
+			copiaReservas.add(new Reserva(coleccionReservas.get(i)));
 		}
+		
 		return copiaReservas;
 	}
 
-	
-	
-	public int getTamano() {
-		int tamano=0;
-		
-		for (int i=0;i<coleccionReservas.length;i++) {
-			if(coleccionReservas[i]!=null) {tamano++;}
-		}
-		return tamano;
-	}
-	
-	public int getCapacidad() {
-		return coleccionReservas.length;
-	}
-	
 	public void insertar (Reserva reserva) throws OperationNotSupportedException {
-		boolean noEncontrado=false;
+		boolean encontrado=false;
 		
 		if(reserva!=null) {
-			for (int i=0;i<coleccionReservas.length;i++) {
-				if(coleccionReservas[i] != null && coleccionReservas[i].equals(reserva)) {
-					throw new OperationNotSupportedException("ERROR: Ya existe una reserva igual.");}
-				else {
-					noEncontrado=true;}}
+			for (int i=0;i<coleccionReservas.size();i++) {
+				if(coleccionReservas.get(i).equals(reserva)) {
+					encontrado = true;
+					throw new OperationNotSupportedException("ERROR: Ya existe una reserva igual.");
+				}	
+			}
 			
-			if(noEncontrado==true && getTamano()<getCapacidad()){
-				coleccionReservas[getTamano()]=reserva;}
+			if(encontrado == false){
+				coleccionReservas.add(reserva);
+			}
 			else{
 				throw new OperationNotSupportedException("ERROR: No se aceptan m�s reservas.");} 
 			
 		}else {throw new NullPointerException("ERROR: No se puede insertar una reserva nula.");}
 	}
-	
-	public int buscarIndice (Reserva reserva) {
-		if(reserva!=null) {
-			int posicion=0;
-	
-			for (int i=0;i<coleccionReservas.length;i++) {
-				if (coleccionReservas[i]!=null && coleccionReservas[i].equals(reserva)) {
-					posicion=i;}
-				
-			}
-			return posicion;		
-		}else {throw new NullPointerException("ERROR: No se puede buscar una reserva nula");}
-	}
-	
-	
-	public boolean tamanoSuperado(int indice) {
-		boolean superado=false;
-		
-		if (indice> getTamano()) {
-			superado=true;}
-		else{superado=false;}
-		
-		return superado;
-	}
-	
-	public boolean capacidadSuperada(int indice) {
-		boolean superado=false;
-		
-		if (indice> getCapacidad()) {superado=true;}
-		else{superado=false;}
-		
-		return superado;
-	}
-	
+
 	public Reserva buscar(Reserva reserva) {	
 		
 		if(reserva!=null) {
 			boolean encontrado=false;
 			
-			for (int i=0;i<coleccionReservas.length;i++) {
-				if(coleccionReservas[i]!=null && coleccionReservas[i].equals(reserva)) {
-					encontrado=true;}
+			for (int i=0;i<coleccionReservas.size();i++) {
+				if(coleccionReservas.get(i).equals(reserva)) {
+					encontrado=true;
+				}
 			}
 			
 			if (encontrado==true) {
@@ -127,44 +77,33 @@ public class Reservas {
 		boolean encontrado=false;
 		
 		if(reserva!=null) {
-		int contador=0;
 		int indice=0;
-			for (int i=0;i<coleccionReservas.length;i++) {
-				contador=i;
-				if(coleccionReservas[i]!=null && coleccionReservas[i].equals(reserva)){
-					encontrado=true;indice=contador;}}
+			for (int i=0;i<coleccionReservas.size();i++) {
+				if(coleccionReservas.get(i).equals(reserva)){
+					encontrado=true;
+					indice=i;
+				}
+			}
 			
 			if(encontrado==true){
-				coleccionReservas[indice]=null;	
-				desplazarUnaPosicionHaciaIzquierda(indice);}
+				coleccionReservas.remove(indice);
+			}
 			else {
 				throw new OperationNotSupportedException("ERROR: No existe ninguna reserva como la indicada.");}	
 		
 		}else {throw new NullPointerException("ERROR: No se puede borrar una reserva nula.");}
 	}
-	
-	
-	public void desplazarUnaPosicionHaciaIzquierda(int indice) {
-		
-		for (int i=indice;i<coleccionReservas.length-1;i++) {
-			coleccionReservas[i]=coleccionReservas[i+1];
-			coleccionReservas[coleccionReservas.length-1]=null;}
-			
-	}
-	
-	public Reserva [] getReservas (Huesped huesped) {
+
+	public ArrayList<Reserva> getReservas (Huesped huesped) {
 	
 	if(huesped!=null) {
-		Reserva [] nuevoArray=new Reserva[coleccionReservas.length];
+		ArrayList<Reserva> nuevoArray=new ArrayList<Reserva>();
 		boolean encontrado=false;
-		int posicion=0;
-	
-		
-		for (int i=0;i<coleccionReservas.length;i++) {
-			if(coleccionReservas[i] != null && coleccionReservas[i].getHuesped().getDni().equals(huesped.getDni())) {
+
+		for (int i=0;i<coleccionReservas.size();i++) {
+			if(coleccionReservas.get(i).getHuesped().getDni().equals(huesped.getDni())) {
 				encontrado=true;
-				nuevoArray[posicion]=coleccionReservas[i];
-				posicion++;
+				nuevoArray.add(coleccionReservas.get(i));
 			}
 		}	
 			
@@ -177,20 +116,19 @@ public class Reservas {
 	}else {throw new  NullPointerException("ERROR: No se pueden buscar reservas de un huesped nulo.");}
 	}
 	
-	public Reserva [] getReservas (TipoHabitacion tipoHabitacion) {
+	public ArrayList<Reserva>  getReservas (TipoHabitacion tipoHabitacion) {
 		
 		if(tipoHabitacion!=null) {
-			Reserva [] nuevoArray=new Reserva[coleccionReservas.length];
+			ArrayList<Reserva> nuevoArray=new ArrayList<Reserva>();
 			boolean encontrado=false;
-			int posicion=0;
-			
-			for (int i=0;i<coleccionReservas.length;i++) {
-				if(coleccionReservas[i] != null && coleccionReservas[i].getHabitacion().getTipoHabitacion().equals(tipoHabitacion)) {
-				encontrado=true;
-				nuevoArray[posicion]=coleccionReservas[i];
-				posicion++;
+
+			for (int i=0;i<coleccionReservas.size();i++) {
+				if(coleccionReservas.get(i).getHabitacion().getTipoHabitacion().equals(tipoHabitacion)) {
+					encontrado=true;
+					nuevoArray.add(coleccionReservas.get(i));
 				}
-			}	
+			}
+			
 			if (encontrado==false) {
 				return null;
 			}
@@ -201,19 +139,19 @@ public class Reservas {
 	}
 	
 	
-	public Reserva [] getReservasFuturas (Habitacion habitacion) {
+	public ArrayList<Reserva> getReservasFuturas (Habitacion habitacion) {
 
 	if(habitacion!=null) {
-		Reserva [] nuevoArray=new Reserva[coleccionReservas.length];
+		ArrayList<Reserva>  nuevoArray=new ArrayList<Reserva>();
 		boolean encontrado=false;
 		int posicion=0;
 		
-		for (int i=0;i<coleccionReservas.length;i++) 
-			if(coleccionReservas[i].getHabitacion().equals(habitacion) && coleccionReservas[i].getFechaInicioReserva().isAfter(LocalDate.now())) {
+		for (int i=0;i<coleccionReservas.size();i++) 
+			if(coleccionReservas.get(i).getHabitacion().equals(habitacion) 
+					&& coleccionReservas.get(i).getFechaInicioReserva().isAfter(LocalDate.now())) {
 			encontrado=true;
-			nuevoArray[posicion]=coleccionReservas[i];
-			posicion++;
-			}
+			nuevoArray.add(coleccionReservas.get(i));
+		}
 			
 		if (encontrado==true) {
 			return null;

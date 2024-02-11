@@ -1,6 +1,7 @@
 package org.iesalandalus.programacion.reservashotel.modelo;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import javax.naming.OperationNotSupportedException;
 
@@ -24,9 +25,9 @@ public class Modelo {
 	}
 
 	public void comenzar() {
-		huespedes=new Huespedes(CAPACIDAD);
-		habitaciones=new Habitaciones(CAPACIDAD);
-		reservas=new Reservas(CAPACIDAD);
+		huespedes=new Huespedes();
+		habitaciones=new Habitaciones();
+		reservas=new Reservas();
 		
 	}
 	
@@ -52,8 +53,8 @@ public class Modelo {
 			System.out.println(ex.getMessage());}
 		}
 	
-	public Huesped [] getHuespedes(){
-		Huesped [] nuevoArray1=huespedes.get();
+	public ArrayList<Huesped> getHuespedes(){
+		ArrayList<Huesped> nuevoArray1=huespedes.get();
 		return nuevoArray1;
 	}
 	
@@ -77,13 +78,13 @@ public class Modelo {
 		
 	}
 	
-	public Habitacion [] getHabitaciones(){
-		Habitacion [] nuevoArray1=habitaciones.get();
+	public ArrayList<Habitacion> getHabitaciones(){
+		ArrayList<Habitacion> nuevoArray1=habitaciones.get();
 		return nuevoArray1;
 	}
 	
-	public Habitacion [] getHabitaciones(TipoHabitacion tipoHabitacion){
-		Habitacion [] nuevoArray1=habitaciones.get(tipoHabitacion);
+	public ArrayList<Habitacion> getHabitaciones(TipoHabitacion tipoHabitacion){
+		ArrayList<Habitacion> nuevoArray1=habitaciones.get(tipoHabitacion);
 		return nuevoArray1;
 	}
 	
@@ -106,18 +107,18 @@ public class Modelo {
 			System.out.println(ex.getMessage());}	
 	}
 	
-	public Reserva [] getReservas(){
-		Reserva [] nuevoArray1=reservas.get();
+	public ArrayList<Reserva> getReservas(){
+		ArrayList<Reserva> nuevoArray1=reservas.get();
 		return nuevoArray1;
 	}
 	
-	public Reserva [] getReservas(Huesped huesped){
-		Reserva [] nuevoArray1=reservas.getReservas(huesped);
+	public ArrayList<Reserva> getReservas(Huesped huesped){
+		ArrayList<Reserva> nuevoArray1=reservas.getReservas(huesped);
 		return nuevoArray1;
 	}
 	
-	public Reserva [] getReservas(TipoHabitacion tipoHabitacion){
-		Reserva [] nuevoArray1=reservas.getReservas(tipoHabitacion);
+	public ArrayList<Reserva> getReservas(TipoHabitacion tipoHabitacion){
+		ArrayList<Reserva> nuevoArray1=reservas.getReservas(tipoHabitacion);
 		return nuevoArray1;
 	}
 	
