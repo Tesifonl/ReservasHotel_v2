@@ -1,5 +1,6 @@
 package org.iesalandalus.programacion.reservashotel.negocio;
 
+import org.iesalandalus.programacion.reservashotel.MainApp;
 import org.iesalandalus.programacion.reservashotel.modelo.dominio.Habitacion;
 import org.iesalandalus.programacion.reservashotel.modelo.dominio.TipoHabitacion;
 import org.iesalandalus.programacion.reservashotel.modelo.negocio.Habitaciones;
@@ -14,22 +15,22 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class HabitacionesTest {
 
-    private static final String ERROR_INSERTAR_HABITACION_NULA = "ERROR: No se puede insertar una habitaci�n nula.";
-    private static final String ERROR_BORRAR_HABITACION_NULA = "ERROR: No se puede borrar una habitaci�n nula.";
-    private static final String ERROR_HABITACION_EXISTE = "ERROR: Ya existe una habitaci�n con ese identificador.";
-    private static final String ERROR_HABITACION_BORRAR_NO_EXISTE = "ERROR: No existe ninguna habitaci�n como la indicada.";
+    private static final String ERROR_INSERTAR_HABITACION_NULA = "ERROR: No se puede insertar una habitación nula.";
+    private static final String ERROR_BORRAR_HABITACION_NULA = "ERROR: No se puede borrar una habitación nula.";
+    private static final String ERROR_HABITACION_EXISTE = "ERROR: Ya existe una habitación con ese identificador.";
+    private static final String ERROR_HABITACION_BORRAR_NO_EXISTE = "ERROR: No existe ninguna habitación como la indicada.";
 
-    private static final String OPERACION_NO_PERMITIDA = "Deber�a haber saltado una excepci�n indicando que dicha operaci�n no est� permitida.";
-    private static final String HABITACION_NULA = "Deber�a haber saltado una excepci�n indicando que no se puede operar con un habitaci�n nula.";
-    private static final String MENSAJE_EXCEPCION_NO_CORRECTO = "El mensaje devuelto por la excepci�n no es correcto.";
-    private static final String TIPO_EXCEPCION_NO_CORRECTO = "El tipo de la excepci�n no es correcto.";
-    private static final String EXCEPCION_NO_PROCEDE = "No deber�a haber saltado la excepci�n.";
-    private static final String OPERACION_NO_REALIZADA = "La operaci�n no la ha realizado correctamente.";
-    private static final String HABITACIONES_NO_CREADAS = "Deber�a haber creado las habitaciones correctamente.";
+    private static final String OPERACION_NO_PERMITIDA = "Debería haber saltado una excepción indicando que dicha operación no está permitida.";
+    private static final String HABITACION_NULA = "Debería haber saltado una excepción indicando que no se puede operar con un habitación nula.";
+    private static final String MENSAJE_EXCEPCION_NO_CORRECTO = "El mensaje devuelto por la excepción no es correcto.";
+    private static final String TIPO_EXCEPCION_NO_CORRECTO = "El tipo de la excepción no es correcto.";
+    private static final String EXCEPCION_NO_PROCEDE = "No debería haber saltado la excepción.";
+    private static final String OPERACION_NO_REALIZADA = "La operación no la ha realizado correctamente.";
+    private static final String HABITACIONES_NO_CREADAS = "Debería haber creado las habitaciones correctamente.";
     private static final String REFERENCIA_NO_ESPERADA = "La referencia devuelta es la misma que la pasada.";
-    private static final String TAMANO_NO_ESPERADO = "El tama�o devuelto no es el esperado.";
-    private static final String HABITACION_NO_ESPERADA = "La habitaci�n devuelta no es la que deber�a ser.";
-    private static final String MENSAJE_ERROR_BUSCAR_HABITACION_NULA = "ERROR: No se puede buscar una habitaci�n nula.";
+    private static final String TAMANO_NO_ESPERADO = "El tamaño devuelto no es el esperado.";
+    private static final String HABITACION_NO_ESPERADA = "La habitación devuelta no es la que debería ser.";
+    private static final String MENSAJE_ERROR_BUSCAR_HABITACION_NULA = "ERROR: No se puede buscar una habitación nula.";
 
 
 
@@ -76,7 +77,7 @@ public class HabitacionesTest {
             List<Habitacion> copiaHabitaciones = habitaciones.get();
             assertEquals(1, habitaciones.getTamano(), TAMANO_NO_ESPERADO);
             assertEquals(habitacion1, habitaciones.buscar(habitacion1), HABITACION_NO_ESPERADA);
-            assertSame(habitacion1, copiaHabitaciones.get(0), REFERENCIA_NO_ESPERADA);
+            assertNotSame(habitacion1, copiaHabitaciones.get(0), REFERENCIA_NO_ESPERADA);
             assertEquals(habitacion1, copiaHabitaciones.get(0), OPERACION_NO_REALIZADA);
         } catch (OperationNotSupportedException e) {
             fail(EXCEPCION_NO_PROCEDE);
@@ -94,10 +95,10 @@ public class HabitacionesTest {
             List<Habitacion> copiaHabitaciones = habitaciones.get();
             assertEquals(2, habitaciones.getTamano(), TAMANO_NO_ESPERADO);
             assertEquals(habitacion1, habitaciones.buscar(habitacion1), HABITACION_NO_ESPERADA);
-            assertSame(habitacion1, copiaHabitaciones.get(0), REFERENCIA_NO_ESPERADA);
+            assertNotSame(habitacion1, copiaHabitaciones.get(0), REFERENCIA_NO_ESPERADA);
             assertEquals(habitacion1, copiaHabitaciones.get(0), OPERACION_NO_REALIZADA);
             assertEquals(habitacion2, habitaciones.buscar(habitacion2), HABITACION_NO_ESPERADA);
-            assertSame(habitacion2, copiaHabitaciones.get(1), REFERENCIA_NO_ESPERADA);
+            assertNotSame(habitacion2, copiaHabitaciones.get(1), REFERENCIA_NO_ESPERADA);
             assertEquals(habitacion2, copiaHabitaciones.get(1), OPERACION_NO_REALIZADA);
         } catch (OperationNotSupportedException e) {
             fail(EXCEPCION_NO_PROCEDE);
@@ -117,13 +118,13 @@ public class HabitacionesTest {
 
             assertEquals(3, habitaciones.getTamano(), TAMANO_NO_ESPERADO);
             assertEquals(habitacion1, habitaciones.buscar(habitacion1), HABITACION_NO_ESPERADA);
-            assertSame(habitacion1, copiaHabitaciones.get(0), REFERENCIA_NO_ESPERADA);
+            assertNotSame(habitacion1, copiaHabitaciones.get(0), REFERENCIA_NO_ESPERADA);
             assertEquals(habitacion1, copiaHabitaciones.get(0), OPERACION_NO_REALIZADA);
             assertEquals(habitacion2, habitaciones.buscar(habitacion2), HABITACION_NO_ESPERADA);
-            assertSame(habitacion2, copiaHabitaciones.get(1), REFERENCIA_NO_ESPERADA);
+            assertNotSame(habitacion2, copiaHabitaciones.get(1), REFERENCIA_NO_ESPERADA);
             assertEquals(habitacion2, copiaHabitaciones.get(1), OPERACION_NO_REALIZADA);
             assertEquals(habitacion3, habitaciones.buscar(habitacion3), HABITACION_NO_ESPERADA);
-            assertSame(habitacion3, copiaHabitaciones.get(2), REFERENCIA_NO_ESPERADA);
+            assertNotSame(habitacion3, copiaHabitaciones.get(2), REFERENCIA_NO_ESPERADA);
             assertEquals(habitacion3, copiaHabitaciones.get(2), OPERACION_NO_REALIZADA);
 
         } catch (OperationNotSupportedException e) {

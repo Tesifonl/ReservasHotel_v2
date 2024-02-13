@@ -45,7 +45,7 @@ public class Habitaciones {
 				}
 			
 			}return nuevoArray;
-		}else {throw new  NullPointerException("ERROR: No se puede insertar un hu�sped nulo.");}
+		}else {throw new  NullPointerException("ERROR: No se puede insertar un tipo de habitacion nulo");}
 	}
 	
 	
@@ -60,7 +60,7 @@ public class Habitaciones {
 			for (int i=0;i<coleccionHabitaciones.size();i++) {
 				if(coleccionHabitaciones.get(i).getIdentificador().equals(habitacion.getIdentificador())) {
 					encontrado = true;
-					throw new OperationNotSupportedException("ERROR: Ya existe una habitaci�n con ese identificador.");
+					throw new OperationNotSupportedException("ERROR: Ya existe una habitación con ese identificador.");
 				}
 			}
 			
@@ -69,23 +69,23 @@ public class Habitaciones {
 			}
 		}
 		else {
-			throw new NullPointerException("ERROR: No se puede insertar una habitaci�n nula.");
+			throw new NullPointerException("ERROR: No se puede insertar una habitación nula.");
 		}
 	}
 
 	public Habitacion buscar(Habitacion habitacion) {	
+		Habitacion buscarHabitacion=null;
+		int indice=0;
+		
 		if(habitacion!=null) {
-			boolean encontrado=false;
-			int posicion = 0;
-			for (int i=0;i<coleccionHabitaciones.size();i++) {
-				if (coleccionHabitaciones.get(i).getIdentificador().equals(habitacion.getIdentificador())) {
-					encontrado=true;
-					posicion = i;
-				}	
-			}	
-			if (encontrado==true) {
-				return new Habitacion (coleccionHabitaciones.get(posicion));}else {return null;}
-		}else {throw new NullPointerException("ERROR: No se puede buscar una habitacion nula");}
+
+			if (coleccionHabitaciones.contains(habitacion)) {
+				indice=coleccionHabitaciones.indexOf(habitacion);
+				buscarHabitacion=coleccionHabitaciones.get(indice);
+				return buscarHabitacion;
+				}else return null;
+		}else {
+			throw new NullPointerException("ERROR: No se puede buscar una habitación nula.");}
 	}
 	
 	public void borrar (Habitacion habitacion) throws OperationNotSupportedException {
@@ -102,9 +102,9 @@ public class Habitaciones {
 			if(encontrado==true){
 				coleccionHabitaciones.remove(indice);
 			}
-			else {throw new OperationNotSupportedException("ERROR: No existe ninguna habitaci�n como la indicada.");}	
+			else {throw new OperationNotSupportedException("ERROR: No existe ninguna habitación como la indicada.");}	
 		
-		}else {throw new NullPointerException("ERROR: No se puede borrar una habitaci�n nula.");}
+		}else {throw new NullPointerException("ERROR: No se puede borrar una habitación nula.");}
 	}
 }
 

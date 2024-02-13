@@ -1,8 +1,10 @@
 package org.iesalandalus.programacion.reservashotel.negocio;
 
-import org.junit.jupiter.api.Test;
+import org.iesalandalus.programacion.reservashotel.MainApp;
 import org.iesalandalus.programacion.reservashotel.modelo.dominio.Huesped;
+
 import org.iesalandalus.programacion.reservashotel.modelo.negocio.Huespedes;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeAll;
 
 import javax.naming.OperationNotSupportedException;
@@ -13,28 +15,28 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class HuespedesTest {
 
-    private static final String ERROR_INSERTAR_HUESPED_NULO = "ERROR: No se puede insertar un hu�sped nulo.";
-    private static final String ERROR_BORRAR_HUESPED_NULO = "ERROR: No se puede borrar un hu�sped nulo.";
+    private static final String ERROR_INSERTAR_HUESPED_NULO = "ERROR: No se puede insertar un huésped nulo.";
+    private static final String ERROR_BORRAR_HUESPED_NULO = "ERROR: No se puede borrar un huésped nulo.";
 
-    private static final String ERROR_HUESPED_EXISTE = "ERROR: Ya existe un hu�sped con ese dni.";
-    private static final String ERROR_HUESPED_BORRAR_NO_EXISTE = "ERROR: No existe ning�n hu�sped como el indicado.";
+    private static final String ERROR_HUESPED_EXISTE = "ERROR: Ya existe un huésped con ese dni.";
+    private static final String ERROR_HUESPED_BORRAR_NO_EXISTE = "ERROR: No existe ningún huésped como el indicado.";
 
-    private static final String OPERACION_NO_PERMITIDA = "Deber�a haber saltado una excepci�n indicando que dicha operaci�n no est� permitida.";
-    private static final String HUESPED_NULO = "Deber�a haber saltado una excepci�n indicando que no se puede operar con un hu�sped nulo.";
-    private static final String MENSAJE_EXCEPCION_NO_CORRECTO = "El mensaje devuelto por la excepci�n no es correcto.";
-    private static final String TIPO_EXCEPCION_NO_CORRECTO = "El tipo de la excepci�n no es correcto.";
-    private static final String EXCEPCION_NO_PROCEDE = "No deber�a haber saltado la excepci�n.";
-    private static final String OPERACION_NO_REALIZADA = "La operaci�n no la ha realizado correctamente.";
-    private static final String HUESPEDES_NO_CREADOS = "Deber�a haber creado los hu�spedes correctamente.";
+    private static final String OPERACION_NO_PERMITIDA = "Debería haber saltado una excepción indicando que dicha operación no está permitida.";
+    private static final String HUESPED_NULO = "Debería haber saltado una excepción indicando que no se puede operar con un huésped nulo.";
+    private static final String MENSAJE_EXCEPCION_NO_CORRECTO = "El mensaje devuelto por la excepción no es correcto.";
+    private static final String TIPO_EXCEPCION_NO_CORRECTO = "El tipo de la excepción no es correcto.";
+    private static final String EXCEPCION_NO_PROCEDE = "No debería haber saltado la excepción.";
+    private static final String OPERACION_NO_REALIZADA = "La operación no la ha realizado correctamente.";
+    private static final String HUESPEDES_NO_CREADOS = "Debería haber creado los huéspedes correctamente.";
     private static final String REFERENCIA_NO_ESPERADA = "La referencia devuelta es la misma que la pasada.";
-    private static final String TAMANO_NO_ESPERADO = "El tama�o devuelto no es el esperado.";
-    private static final String HUESPED_NO_ESPERADO = "El hu�sped devuelto no es el que deber�a ser.";
-    private static final String NOMBRE_JRJR = "Jos� Ram�n Jim�nez Reyes";
+    private static final String TAMANO_NO_ESPERADO = "El tamaño devuelto no es el esperado.";
+    private static final String HUESPED_NO_ESPERADO = "El huésped devuelto no es el que debería ser.";
+    private static final String NOMBRE_JRJR = "José Ramón Jiménez Reyes";
     private static final String DNI_JRJR = "11223344B";
     private static final String TELEFONO_JRJR = "950112233";
     private static final String CORREO_JRJR = "joseramon.jimenez@iesalandalus.org";
     private static final LocalDate FECHA_NACIMIENTO_JRJR=LocalDate.of(2002, 9, 15);
-    private static final String NOMBRE_ARDR = "Andr�s Rubio Del R�o";
+    private static final String NOMBRE_ARDR = "Andrés Rubio Del Río";
     private static final String DNI_ARDR = "22334455Y";
     private static final String TELEFONO_ARDR = "666223344";
     private static final String CORREO_ARDR = "andres.rubio@iesalandalus.org";
@@ -44,7 +46,7 @@ public class HuespedesTest {
     private static final String TELEFONO_BE = "600334455";
     private static final String CORREO_BE = "bog.esponja@iesalandalus.org";
     private static final LocalDate FECHA_NACIMIENTO_BE=LocalDate.of(1996, 10, 30);
-    private static final String MENSAJE_ERROR_BUSCAR_HUESPED_NULO = "ERROR: No se puede buscar un hu�sped nulo.";
+    private static final String MENSAJE_ERROR_BUSCAR_HUESPED_NULO = "ERROR: No se puede buscar un huésped nulo.";
 
 
     private static Huesped huesped1;
@@ -80,7 +82,7 @@ public class HuespedesTest {
             List<Huesped> copiaHuespedes = huespedes.get();
             assertEquals(1, huespedes.getTamano(), TAMANO_NO_ESPERADO);
             assertEquals(huesped1, huespedes.buscar(huesped1), HUESPED_NO_ESPERADO);
-            assertSame(huesped1, copiaHuespedes.get(0), REFERENCIA_NO_ESPERADA);
+            assertNotSame(huesped1, copiaHuespedes.get(0), REFERENCIA_NO_ESPERADA);
             assertEquals(huesped1, copiaHuespedes.get(0), OPERACION_NO_REALIZADA);
         } catch (OperationNotSupportedException e) {
             fail(EXCEPCION_NO_PROCEDE);
@@ -98,10 +100,10 @@ public class HuespedesTest {
             List<Huesped> copiaHuespedes = huespedes.get();
             assertEquals(2, huespedes.getTamano(), TAMANO_NO_ESPERADO);
             assertEquals(huesped1, huespedes.buscar(huesped1), HUESPED_NO_ESPERADO);
-            assertSame(huesped1, copiaHuespedes.get(0), REFERENCIA_NO_ESPERADA);
+            assertNotSame(huesped1, copiaHuespedes.get(0), REFERENCIA_NO_ESPERADA);
             assertEquals(huesped1, copiaHuespedes.get(0), OPERACION_NO_REALIZADA);
             assertEquals(huesped2, huespedes.buscar(huesped2), HUESPED_NO_ESPERADO);
-            assertSame(huesped2, copiaHuespedes.get(1), REFERENCIA_NO_ESPERADA);
+            assertNotSame(huesped2, copiaHuespedes.get(1), REFERENCIA_NO_ESPERADA);
             assertEquals(huesped2, copiaHuespedes.get(1), OPERACION_NO_REALIZADA);
         } catch (OperationNotSupportedException e) {
             fail(EXCEPCION_NO_PROCEDE);
@@ -121,13 +123,13 @@ public class HuespedesTest {
 
             assertEquals(3, huespedes.getTamano(), TAMANO_NO_ESPERADO);
             assertEquals(huesped1, huespedes.buscar(huesped1), HUESPED_NO_ESPERADO);
-            assertSame(huesped1, copiaHuespedes.get(0), REFERENCIA_NO_ESPERADA);
+            assertNotSame(huesped1, copiaHuespedes.get(0), REFERENCIA_NO_ESPERADA);
             assertEquals(huesped1, copiaHuespedes.get(0), OPERACION_NO_REALIZADA);
             assertEquals(huesped2, huespedes.buscar(huesped2), HUESPED_NO_ESPERADO);
-            assertSame(huesped2, copiaHuespedes.get(1), REFERENCIA_NO_ESPERADA);
+            assertNotSame(huesped2, copiaHuespedes.get(1), REFERENCIA_NO_ESPERADA);
             assertEquals(huesped2, copiaHuespedes.get(1), OPERACION_NO_REALIZADA);
             assertEquals(huesped3, huespedes.buscar(huesped3), HUESPED_NO_ESPERADO);
-            assertSame(huesped3, copiaHuespedes.get(2), REFERENCIA_NO_ESPERADA);
+            assertNotSame(huesped3, copiaHuespedes.get(2), REFERENCIA_NO_ESPERADA);
             assertEquals(huesped3, copiaHuespedes.get(2), OPERACION_NO_REALIZADA);
 
 

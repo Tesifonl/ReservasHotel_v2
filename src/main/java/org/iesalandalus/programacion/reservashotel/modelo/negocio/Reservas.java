@@ -45,57 +45,37 @@ public class Reservas {
 	}
 
 	public void insertar (Reserva reserva) throws OperationNotSupportedException {
-		boolean encontrado=false;
 		
 		if(reserva!=null) {
-			for (int i=0;i<coleccionReservas.size();i++) {
-				if(coleccionReservas.get(i).equals(reserva)) {
-					encontrado = true;
-					throw new OperationNotSupportedException("ERROR: Ya existe una reserva igual.");
-				}	
-			}
-			
-			if(encontrado == false){
-				coleccionReservas.add(reserva);
-			}
-			else{
-				throw new OperationNotSupportedException("ERROR: No se aceptan m�s reservas.");} 
+			if(coleccionReservas.contains(reserva)) {
+				throw new OperationNotSupportedException("ERROR: Ya existe una reserva igual.");
+			}	else {coleccionReservas.add(reserva);}
 			
 		}else {throw new NullPointerException("ERROR: No se puede insertar una reserva nula.");}
 	}
 
 	public Reserva buscar(Reserva reserva) {	
+		Reserva buscarReserva=null;
+		int indice=0;
 		
 		if(reserva!=null) {
-			boolean encontrado=false;
-			
-			for (int i=0;i<coleccionReservas.size();i++) {
-				if(coleccionReservas.get(i).equals(reserva)) {
-					encontrado=true;
-				}
-			}
-			
-			if (encontrado==true) {
-				return new Reserva(reserva);}else {return null;}
-		}else {throw new NullPointerException("ERROR: No se puede buscar una reserva nula");}
+				if(coleccionReservas.contains(reserva)) {
+					indice=coleccionReservas.indexOf(reserva);
+					buscarReserva=coleccionReservas.get(indice);
+					return buscarReserva;
+				}else {return null;}
+			}else {throw new NullPointerException("ERROR: No se puede buscar una reserva nula.");}
 	}
 	
 	public void borrar (Reserva reserva) throws OperationNotSupportedException {
-		boolean encontrado=false;
+		int indice=0;
 		
 		if(reserva!=null) {
-		int indice=0;
-			for (int i=0;i<coleccionReservas.size();i++) {
-				if(coleccionReservas.get(i).equals(reserva)){
-					encontrado=true;
-					indice=i;
-				}
-			}
-			
-			if(encontrado==true){
+
+			if(coleccionReservas.contains(reserva)){
+				indice=coleccionReservas.indexOf(reserva);
 				coleccionReservas.remove(indice);
-			}
-			else {
+			}else {
 				throw new OperationNotSupportedException("ERROR: No existe ninguna reserva como la indicada.");}	
 		
 		}else {throw new NullPointerException("ERROR: No se puede borrar una reserva nula.");}
@@ -142,7 +122,7 @@ public class Reservas {
 							
 			return nuevoArray;
 			
-		}else {throw new  NullPointerException("ERROR: No se pueden buscar reservas de un tipo de habitaci�n nula.");}
+		}else {throw new  NullPointerException("ERROR: No se pueden buscar reservas de un tipo de habitación nula.");}
 	}
 	
 	
@@ -160,12 +140,12 @@ public class Reservas {
 			nuevoArray.add(coleccionReservas.get(i));
 		}
 			
-		if (encontrado==true) {
+		if (encontrado==false) {
 			return null;
 		}
 		return nuevoArray;
 
-	}else {throw new  NullPointerException("ERROR: No se pueden buscar reservas de una habitaci�n nula.");}
+	}else {throw new  NullPointerException("ERROR: No se pueden buscar reservas de una habitación nula.");}
 	}
 
 	public void realizarCheckin(Reserva reserva, LocalDateTime fecha) {

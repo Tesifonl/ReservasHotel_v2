@@ -18,7 +18,7 @@ public class Modelo {
 	private Huespedes huespedes;
 	private Habitaciones habitaciones;
 	private Reservas reservas;
-	private final int CAPACIDAD=100;
+
 	
 	public Modelo() {
 		comenzar();

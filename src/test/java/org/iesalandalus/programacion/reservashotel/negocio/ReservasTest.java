@@ -1,5 +1,6 @@
 package org.iesalandalus.programacion.reservashotel.negocio;
 
+import org.iesalandalus.programacion.reservashotel.MainApp;
 import org.iesalandalus.programacion.reservashotel.modelo.dominio.*;
 import org.iesalandalus.programacion.reservashotel.modelo.negocio.Reservas;
 import org.junit.jupiter.api.BeforeAll;
@@ -27,11 +28,11 @@ public class ReservasTest {
     private static Reserva reserva3;
     private static Reserva reservaRepetida1;
 
-    private static final String NOMBRE_JRJR = "Jos� Ram�n Jim�nez Reyes";
+    private static final String NOMBRE_JRJR = "José Ramón Jiménez Reyes";
     private static final String DNI_JRJR = "11223344B";
     private static final String TELEFONO_JRJR = "950112233";
     private static final String CORREO_JRJR = "joseramon.jimenez@iesalandalus.org";
-    private static final String NOMBRE_ARDR = "Andr�s Rubio Del R�o";
+    private static final String NOMBRE_ARDR = "Andrés Rubio Del Río";
     private static final String DNI_ARDR = "22334455Y";
     private static final String TELEFONO_ARDR = "666223344";
     private static final String CORREO_ARDR = "andres.rubio@iesalandalus.org";
@@ -61,28 +62,28 @@ public class ReservasTest {
     private static final LocalDate FECHA_INICIO_FUTURA_VALIDA=LocalDate.now().plusDays(3);
     private static final LocalDate FECHA_FIN_FUTURA_VALIDA=FECHA_INICIO_FUTURA_VALIDA.plusDays(7);
 
-    private static final String RESERVAS_NO_CREADAS = "Deber�a haber creado las reservas correctamente.";
-    private static final String TAMANO_NO_ESPERADO = "El tama�o devuelto no es el esperado.";
-    private static final String OPERACION_NO_PERMITIDA = "Deber�a haber saltado una excepci�n indicando que dicha operaci�n no est� permitida.";
-    private static final String MENSAJE_EXCEPCION_NO_CORRECTO = "El mensaje devuelto por la excepci�n no es correcto.";
-    private static final String TIPO_EXCEPCION_NO_CORRECTO = "El tipo de la excepci�n no es correcto.";
-    private static final String EXCEPCION_NO_PROCEDE = "No deber�a haber saltado la excepci�n.";
-    private static final String RESERVA_NO_ESPERADA = "La reserva devuelta no es la que deber�a ser.";
+    private static final String RESERVAS_NO_CREADAS = "Debería haber creado las reservas correctamente.";
+    private static final String TAMANO_NO_ESPERADO = "El tamaño devuelto no es el esperado.";
+    private static final String OPERACION_NO_PERMITIDA = "Debería haber saltado una excepción indicando que dicha operación no está permitida.";
+    private static final String MENSAJE_EXCEPCION_NO_CORRECTO = "El mensaje devuelto por la excepción no es correcto.";
+    private static final String TIPO_EXCEPCION_NO_CORRECTO = "El tipo de la excepción no es correcto.";
+    private static final String EXCEPCION_NO_PROCEDE = "No debería haber saltado la excepción.";
+    private static final String RESERVA_NO_ESPERADA = "La reserva devuelta no es la que debería ser.";
 
     private static final String REFERENCIA_NO_ESPERADA = "La referencia devuelta es la misma que la pasada.";
-    private static final String OPERACION_NO_REALIZADA = "La operaci�n no la ha realizado correctamente.";
-    private static final String RESERVA_NULA = "Deber�a haber saltado una excepci�n indicando que no se puede operar con una reserva nula.";
+    private static final String OPERACION_NO_REALIZADA = "La operación no la ha realizado correctamente.";
+    private static final String RESERVA_NULA = "Debería haber saltado una excepción indicando que no se puede operar con una reserva nula.";
     private static final String ERROR_INSERTAR_RESERVA_NULA = "ERROR: No se puede insertar una reserva nula.";
     private static final String ERROR_RESERVA_EXISTE = "ERROR: Ya existe una reserva igual.";
-    private static final String ERROR_NO_MAS_RESERVAS = "ERROR: No se aceptan m�s reservas.";
+    private static final String ERROR_NO_MAS_RESERVAS = "ERROR: No se aceptan más reservas.";
     private static final String ERROR_RESERVA_BORRAR_NO_EXISTE = "ERROR: No existe ninguna reserva como la indicada.";
     private static final String ERROR_BORRAR_RESERVA_NULA = "ERROR: No se puede borrar una reserva nula.";
-    private static final String RESERVAS_HUESPED_NULO="Deber�a haber saltado una excepci�n indicando que no se puede operar con un hu�sped nulo.";
+    private static final String RESERVAS_HUESPED_NULO="Debería haber saltado una excepción indicando que no se puede operar con un huésped nulo.";
     private static final String ERROR_RESERVAS_HUESPED_NULO="ERROR: No se pueden buscar reservas de un huesped nulo.";
-    private static final String RESERVAS_TIPO_HABITACION_NULA="Deber�a haber saltado una excepci�n indicando que no se puede operar con un tipo de habitaci�n nula.";
-    private static final String ERROR_RESERVAS_TIPO_HABITACION_NULA="ERROR: No se pueden buscar reservas de un tipo de habitaci�n nula.";
-    private static final String RESERVAS_HABITACION_NULA="Deber�a haber saltado una excepci�n indicando que no se puede operar con una habitaci�n nula.";
-    private static final String ERROR_RESERVAS_HABITACION_NULA="ERROR: No se pueden buscar reservas de una habitaci�n nula.";
+    private static final String RESERVAS_TIPO_HABITACION_NULA="Debería haber saltado una excepción indicando que no se puede operar con un tipo de habitación nula.";
+    private static final String ERROR_RESERVAS_TIPO_HABITACION_NULA="ERROR: No se pueden buscar reservas de un tipo de habitación nula.";
+    private static final String RESERVAS_HABITACION_NULA="Debería haber saltado una excepción indicando que no se puede operar con una habitación nula.";
+    private static final String ERROR_RESERVAS_HABITACION_NULA="ERROR: No se pueden buscar reservas de una habitación nula.";
 
     private static final String MENSAJE_ERROR_BUSCAR_RESERVA_NULA = "ERROR: No se puede buscar una reserva nula.";
 
@@ -122,7 +123,7 @@ public class ReservasTest {
             List<Reserva> copiaReservas = reservas.get();
             assertEquals(1, reservas.getTamano(), TAMANO_NO_ESPERADO);
             assertEquals(reserva1, reservas.buscar(reserva1), RESERVA_NO_ESPERADA);
-            assertSame(reserva1, copiaReservas.get(0), REFERENCIA_NO_ESPERADA);
+            assertNotSame(reserva1, copiaReservas.get(0), REFERENCIA_NO_ESPERADA);
             assertEquals(reserva1, copiaReservas.get(0), OPERACION_NO_REALIZADA);
         } catch (OperationNotSupportedException e) {
             fail(EXCEPCION_NO_PROCEDE);
@@ -140,10 +141,10 @@ public class ReservasTest {
             List<Reserva> copiaReservas = reservas.get();
             assertEquals(2, reservas.getTamano(), TAMANO_NO_ESPERADO);
             assertEquals(reserva1, reservas.buscar(reserva1), RESERVA_NO_ESPERADA);
-            assertSame(reserva1, copiaReservas.get(0), REFERENCIA_NO_ESPERADA);
+            assertNotSame(reserva1, copiaReservas.get(0), REFERENCIA_NO_ESPERADA);
             assertEquals(reserva1, copiaReservas.get(0), OPERACION_NO_REALIZADA);
             assertEquals(reserva2, reservas.buscar(reserva2), RESERVA_NO_ESPERADA);
-            assertSame(reserva2, copiaReservas.get(1), REFERENCIA_NO_ESPERADA);
+            assertNotSame(reserva2, copiaReservas.get(1), REFERENCIA_NO_ESPERADA);
             assertEquals(reserva2, copiaReservas.get(1), OPERACION_NO_REALIZADA);
         } catch (OperationNotSupportedException e) {
             fail(EXCEPCION_NO_PROCEDE);
@@ -163,13 +164,13 @@ public class ReservasTest {
 
             assertEquals(3, reservas.getTamano(), TAMANO_NO_ESPERADO);
             assertEquals(reserva1, reservas.buscar(reserva1), RESERVA_NO_ESPERADA);
-            assertSame(reserva1, copiaReservas.get(0), REFERENCIA_NO_ESPERADA);
+            assertNotSame(reserva1, copiaReservas.get(0), REFERENCIA_NO_ESPERADA);
             assertEquals(reserva1, copiaReservas.get(0), OPERACION_NO_REALIZADA);
             assertEquals(reserva2, reservas.buscar(reserva2), RESERVA_NO_ESPERADA);
-            assertSame(reserva2, copiaReservas.get(1), REFERENCIA_NO_ESPERADA);
+            assertNotSame(reserva2, copiaReservas.get(1), REFERENCIA_NO_ESPERADA);
             assertEquals(reserva2, copiaReservas.get(1), OPERACION_NO_REALIZADA);
             assertEquals(reserva3, reservas.buscar(reserva3), RESERVA_NO_ESPERADA);
-            assertSame(reserva3, copiaReservas.get(2), REFERENCIA_NO_ESPERADA);
+            assertNotSame(reserva3, copiaReservas.get(2), REFERENCIA_NO_ESPERADA);
             assertEquals(reserva3, copiaReservas.get(2), OPERACION_NO_REALIZADA);
 
 
