@@ -125,12 +125,16 @@ public class Modelo {
 	public void realizarCheckin(Reserva reserva, LocalDateTime fecha) throws OperationNotSupportedException {
 		if(reserva==null || fecha==null) {
 			throw new  OperationNotSupportedException("ERROR: No se puede hacer checkin de una reserva nula o sin fecha");
-		}else {reserva.setCheckIn(fecha);}
+		}else {
+			reservas.realizarCheckin(reserva, fecha);
+		}
 	}
 	
 	public void realizarCheckout(Reserva reserva, LocalDateTime fecha) throws OperationNotSupportedException {
 		if(reserva==null || fecha==null) {
 			throw new  OperationNotSupportedException("ERROR: No se puede hacer checkin de una reserva nula o sin fecha");
-		}else {reserva.setCheckOut(fecha);}
+		}else {
+			reservas.realizarCheckout(reserva, fecha);
+		}
 	}
 }

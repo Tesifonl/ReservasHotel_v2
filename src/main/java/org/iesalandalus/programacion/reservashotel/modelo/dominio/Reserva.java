@@ -8,7 +8,7 @@ import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
-public class Reserva {
+public class Reserva implements Comparable<Reserva>{
 	
 	public static final int MAX_NUMERO_MESES_RESERVA=6;
 	private static final int MAX_HORAS_POSTERIOR_CHECKOUT=12;
@@ -210,8 +210,18 @@ public class Reserva {
 		return texto;
 		
 	}
-	
-
+	@Override
+	public int compareTo(Reserva o) {
+		if (fechaInicioReserva.isAfter(o.fechaInicioReserva)) {
+			return 1;
+		}
+		else if (fechaInicioReserva.isBefore(o.fechaInicioReserva)) {
+			return -1;
+		}
+		else {
+			return 0;
+		}
 	}
+}
 
 

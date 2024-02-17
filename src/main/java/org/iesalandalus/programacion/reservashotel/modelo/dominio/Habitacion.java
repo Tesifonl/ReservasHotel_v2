@@ -3,7 +3,7 @@ package org.iesalandalus.programacion.reservashotel.modelo.dominio;
 import java.util.Objects;
 
 
-public class Habitacion {
+public class Habitacion implements Comparable<Habitacion>{
 	
 	public static final double MIN_PRECIO_HABITACION=40;
 	public static final double MAX_PRECIO_HABITACION=150;
@@ -124,6 +124,12 @@ public class Habitacion {
 	@Override
 	public String toString() {
 		return "identificador="+ identificador +" ("+getPlanta()+"-"+getPuerta()+"), precio habitaci�n="+ precio +", tipo habitaci�n=" + tipoHabitacion ;
+	}
+
+	@Override
+	public int compareTo(Habitacion o) {
+		// TODO Auto-generated method stub
+		return identificador.compareTo(o.identificador);
 	}
 
 }

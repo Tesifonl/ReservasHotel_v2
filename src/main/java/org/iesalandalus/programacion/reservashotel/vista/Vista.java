@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 
 
@@ -28,7 +29,7 @@ public class Vista {
 		}else {throw new NullPointerException("ERROR: No con un contralador nulo");}
 	}
 	
-	public void comenzar() throws OperationNotSupportedException {
+	public void comenzar(){
 		
 		do {
 			Consola.mostrarMenu();
@@ -42,7 +43,7 @@ public class Vista {
 		System.out.println("Gracias");
 	}
 	
-	private void ejecutarOpcion(Opcion opcion) throws OperationNotSupportedException {
+	private void ejecutarOpcion(Opcion opcion) {
 
 		if(opcion.equals(Opcion.INSERTAR_HUESPED)) {
 			insertarHuesped();}
@@ -100,7 +101,7 @@ public class Vista {
 	}
 
 
-	private void insertarHuesped() throws OperationNotSupportedException {
+	private void insertarHuesped() {
 		try {
 			controlador.insertar(Consola.leerHuesped());
 		}
@@ -141,8 +142,9 @@ public class Vista {
 
 		if(controlador.getHuespedes().size()>0) {
 			
-			Collection<Huesped> colleccion=controlador.getHuespedes();
-			Iterator<Huesped> iterador = colleccion.iterator();
+			ArrayList<Huesped> huespedes = controlador.getHuespedes();
+			Collections.sort(huespedes);
+			Iterator<Huesped> iterador = huespedes.iterator();
 			
 			while (iterador.hasNext()) {
 				Huesped huesped = iterador.next();
@@ -190,17 +192,15 @@ public class Vista {
 	
 	private void mostrarHabitaciones() {
 	
-		int contador=0;
-		
-		for (int i=0;i<controlador.getHabitaciones().size();i++) {
-			if (controlador.getHabitaciones().get(i)!=null) {
-				contador++;}
-			}
-		if(contador>0) {
-			for (int i=0;i<controlador.getHabitaciones().size();i++) {
-				if (controlador.getHabitaciones().get(i) != null) {
-					System.out.println(controlador.getHabitaciones().get(i));
-				}
+		if(controlador.getHabitaciones().size()>0) {
+			
+			ArrayList<Habitacion> habitaciones = controlador.getHabitaciones();
+			Collections.sort(habitaciones);
+			Iterator<Habitacion> iterador = habitaciones.iterator();
+			
+			while (iterador.hasNext()) {
+				Habitacion habitacion = iterador.next();
+				System.out.println(habitacion);
 			}
 		}
 		else {
@@ -218,11 +218,25 @@ public class Vista {
 	
 	
 	private void listarReservas(Huesped huesped) {
-		ArrayList<Reserva> nuevoArray = controlador.getReservas(huesped);
-		
-		if (nuevoArray!=null) {
-			for (int i=0;i<nuevoArray.size();i++) {
-				System.out.println(nuevoArray.get(i));
+
+		if(controlador.getReservas(huesped).size()>0) {
+			
+			ArrayList<Reserva> reservas = controlador.getReservas(huesped);
+			Collections.sort(reservas, new Comparator<Reserva>() {
+
+				//Añadimos el segundo comparador, que será el comparador ya definido
+				//de la habitacion por planta y puerta
+				@Override
+				public int compare(Reserva o1, Reserva o2) {
+					return o1.getHabitacion().compareTo(o2.getHabitacion());
+				}
+			});
+			
+			Iterator<Reserva> iterador = reservas.iterator();
+			
+			while (iterador.hasNext()) {
+				Reserva reserva = iterador.next();
+				System.out.println(reserva);
 			}
 		}else {
 			System.out.println("No existen reservas para este huesped.");
@@ -231,11 +245,22 @@ public class Vista {
 	
 	private void listarReservas (TipoHabitacion tipoHabitacion) {
 		
-		ArrayList<Reserva> nuevoArray = controlador.getReservas(tipoHabitacion);
 		
-		if (nuevoArray!=null) {
-			for (int i=0;i<nuevoArray.size();i++) {
-				System.out.println(nuevoArray.get(i));
+		if (controlador.getReservas(tipoHabitacion).size() > 0) {
+		
+			ArrayList<Reserva> reservas = controlador.getReservas(tipoHabitacion);
+			Collections.sort(reservas, new Comparator<Reserva>() {
+				@Override
+				public int compare(Reserva o1, Reserva o2) {
+					return o1.getHuesped().compareTo(o2.getHuesped());
+				}
+			});	
+			
+			Iterator<Reserva> iterador = reservas.iterator();
+			
+			while (iterador.hasNext()) {
+				Reserva reserva = iterador.next();
+				System.out.println(reserva);
 			}
 		}else {
 			System.out.println("No existen reservas para este tipo de habitacion.");
@@ -291,13 +316,27 @@ public class Vista {
 	private void mostrarReservas() {
 
 		if(controlador.getReservas().size()>0) {
-			for (int i=0;i<controlador.getReservas().size();i++) {
-				System.out.println(controlador.getReservas().get(i));
-			}	
+			
+			ArrayList<Reserva> reservas = controlador.getReservas();
+			Collections.sort(reservas, new Comparator<Reserva>() {
+
+				//Añadimos el segundo comparador, que será el comparador ya definido
+				//de la habitacion por planta y puerta
+				@Override
+				public int compare(Reserva o1, Reserva o2) {
+					return o1.getHabitacion().compareTo(o2.getHabitacion());
+				}
+			});
+			
+			Iterator<Reserva> iterador = reservas.iterator();
+			
+			while (iterador.hasNext()) {
+				Reserva habitacion = iterador.next();
+				System.out.println(habitacion);
+			}
+		}else {
+			System.out.println("No existen reservas para este huesped.");
 		}
-		else {
-			System.out.println("No hay ninguna reserva");
-		} 
 	}
 	
 	private Habitacion consultarDisponiblidad (TipoHabitacion tipoHabitacion, LocalDate fechaInicioReserva, LocalDate fechaFinReserva){
