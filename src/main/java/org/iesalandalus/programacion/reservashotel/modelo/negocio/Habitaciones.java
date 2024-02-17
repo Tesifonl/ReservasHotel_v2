@@ -11,6 +11,7 @@ import org.iesalandalus.programacion.reservashotel.modelo.dominio.TipoHabitacion
 public class Habitaciones {
 	
 	private static ArrayList<Habitacion> coleccionHabitaciones;
+
 	
 	public Habitaciones() {
 		coleccionHabitaciones=new ArrayList<Habitacion>();
@@ -106,6 +107,9 @@ public class Habitaciones {
 		
 		}else {throw new NullPointerException("ERROR: No se puede borrar una habitación nula.");}
 	}
+	
+	
+
 }
 
 

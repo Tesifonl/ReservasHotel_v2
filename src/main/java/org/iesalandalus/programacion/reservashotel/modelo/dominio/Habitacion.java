@@ -2,6 +2,7 @@ package org.iesalandalus.programacion.reservashotel.modelo.dominio;
 
 import java.util.Objects;
 
+
 public class Habitacion {
 	
 	public static final double MIN_PRECIO_HABITACION=40;
@@ -124,8 +125,5 @@ public class Habitacion {
 	public String toString() {
 		return "identificador="+ identificador +" ("+getPlanta()+"-"+getPuerta()+"), precio habitaci�n="+ precio +", tipo habitaci�n=" + tipoHabitacion ;
 	}
-	
-	
-	
-	
+
 }

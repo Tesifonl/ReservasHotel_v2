@@ -3,6 +3,7 @@ package org.iesalandalus.programacion.reservashotel.vista;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 
@@ -140,7 +141,8 @@ public class Vista {
 
 		if(controlador.getHuespedes().size()>0) {
 			
-			Iterator<Huesped> iterador = controlador.getHuespedes().iterator();
+			Collection<Huesped> colleccion=controlador.getHuespedes();
+			Iterator<Huesped> iterador = colleccion.iterator();
 			
 			while (iterador.hasNext()) {
 				Huesped huesped = iterador.next();

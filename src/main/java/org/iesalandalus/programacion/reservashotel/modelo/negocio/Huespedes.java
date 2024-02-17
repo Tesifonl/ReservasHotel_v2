@@ -2,6 +2,7 @@ package org.iesalandalus.programacion.reservashotel.modelo.negocio;
 
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.naming.OperationNotSupportedException;
 
@@ -10,6 +11,7 @@ import org.iesalandalus.programacion.reservashotel.modelo.dominio.Huesped;
 public class Huespedes {
 
 	private static ArrayList<Huesped> coleccionHuespedes;
+	private static Collection<Huesped> coleccionColeccionHuesped;
 	
 	public Huespedes() {
 		coleccionHuespedes=new ArrayList<Huesped>();

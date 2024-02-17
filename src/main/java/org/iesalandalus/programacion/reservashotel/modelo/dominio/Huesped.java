@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.Objects;
 
-public class Huesped {
+public class Huesped implements Comparable <Huesped> {
 	
 	private static final String ER_TELEFONO="[0-9]{9}";
 	private static final String ER_CORREO="[a-zA-Z1-9áéíóú.]*[@]{1}[a-zA-Z]{1,15}[.]{1}[a-z]*";
@@ -173,6 +173,13 @@ public class Huesped {
 	public String toString() {
 		return "nombre=" + nombre+ " ("+getIniciales(nombre) +")" + ", DNI=" + dni+ ", correo=" + correo + ", tel�fono=" + telefono+ ", fecha nacimiento=" + fechaNacimiento.format(formatoFechaString) ;
 	}
+
+	@Override
+	public int compareTo(Huesped huesped) {
+		// TODO Auto-generated method stub
+		return nombre.compareTo(huesped.nombre);
+	}
+
 
 
 }
