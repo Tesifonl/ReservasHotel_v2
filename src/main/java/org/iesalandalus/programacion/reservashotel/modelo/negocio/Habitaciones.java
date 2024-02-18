@@ -14,7 +14,7 @@ public class Habitaciones {
 
 	
 	public Habitaciones() {
-		coleccionHabitaciones=new ArrayList<Habitacion>();
+		coleccionHabitaciones=new ArrayList<>();
 	}
 	
 
@@ -25,7 +25,7 @@ public class Habitaciones {
 	
 	
 	private ArrayList<Habitacion> copiaProfundaHabitaciones() {
-		ArrayList<Habitacion> copiahabitaciones=new ArrayList<Habitacion>();
+		ArrayList<Habitacion> copiahabitaciones=new ArrayList<>();
 		
 		for (int i=0;i<coleccionHabitaciones.size();i++) {
 			copiahabitaciones.add(new Habitacion(coleccionHabitaciones.get(i)));
@@ -38,7 +38,7 @@ public class Habitaciones {
 	public ArrayList<Habitacion> get (TipoHabitacion tipoHabitacion) {
 		
 		if(tipoHabitacion!=null) {
-			ArrayList<Habitacion> nuevoArray= new ArrayList<Habitacion>();
+			ArrayList<Habitacion> nuevoArray= new ArrayList<>();
 
 			for (int i=0;i<coleccionHabitaciones.size();i++) {
 				if(coleccionHabitaciones.get(i).getTipoHabitacion().equals(tipoHabitacion)) {

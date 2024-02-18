@@ -17,7 +17,7 @@ public class Reservas {
 	
 	public Reservas () {
 		
-		coleccionReservas=new ArrayList<Reserva>();
+		coleccionReservas=new ArrayList<>();
 	}
 	
 
@@ -35,7 +35,7 @@ public class Reservas {
 	
 	
 	private ArrayList<Reserva> copiaProfundaReservas() {
-		ArrayList<Reserva> copiaReservas=new ArrayList<Reserva>();
+		ArrayList<Reserva> copiaReservas=new ArrayList<>();
 		
 		for (int i=0;i<coleccionReservas.size();i++) {
 			copiaReservas.add(new Reserva(coleccionReservas.get(i)));
@@ -85,7 +85,7 @@ public class Reservas {
 	public ArrayList<Reserva> getReservas (Huesped huesped) {
 	
 	if(huesped!=null) {
-		ArrayList<Reserva> nuevoArray=new ArrayList<Reserva>();
+		ArrayList<Reserva> nuevoArray=new ArrayList<>();
 		boolean encontrado=false;
 
 		for (int i=0;i<coleccionReservas.size();i++) {
@@ -107,7 +107,7 @@ public class Reservas {
 	public ArrayList<Reserva>  getReservas (TipoHabitacion tipoHabitacion) {
 		
 		if(tipoHabitacion!=null) {
-			ArrayList<Reserva> nuevoArray=new ArrayList<Reserva>();
+			ArrayList<Reserva> nuevoArray=new ArrayList<>();
 			boolean encontrado=false;
 
 			for (int i=0;i<coleccionReservas.size();i++) {
@@ -130,7 +130,7 @@ public class Reservas {
 	public ArrayList<Reserva> getReservasFuturas (Habitacion habitacion) {
 
 	if(habitacion!=null) {
-		ArrayList<Reserva>  nuevoArray=new ArrayList<Reserva>();
+		ArrayList<Reserva>  nuevoArray=new ArrayList<>();
 		boolean encontrado=false;
 		int posicion=0;
 		

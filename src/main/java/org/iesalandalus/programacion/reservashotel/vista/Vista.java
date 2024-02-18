@@ -136,6 +136,7 @@ public class Vista {
 		catch(NullPointerException e){
 			System.out.println(e.getMessage());
 		}
+
 	}
 	
 	private void mostrarHuespedes() {

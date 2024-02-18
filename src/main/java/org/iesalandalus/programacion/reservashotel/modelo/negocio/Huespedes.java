@@ -13,7 +13,7 @@ public class Huespedes {
 	private static ArrayList<Huesped> coleccionHuespedes;
 	
 	public Huespedes() {
-		coleccionHuespedes=new ArrayList<Huesped>();
+		coleccionHuespedes=new ArrayList<>();
 	}
 		
 	public ArrayList<Huesped> get() {
@@ -22,7 +22,7 @@ public class Huespedes {
 	}
 	
 	private ArrayList<Huesped> copiaProfundaHuespedes() {
-		ArrayList<Huesped> copiahuespedes= new ArrayList<Huesped>();
+		ArrayList<Huesped> copiahuespedes= new ArrayList<>();
 		
 		for (int i=0;i<coleccionHuespedes.size();i++) {
 			copiahuespedes.add(new Huesped(coleccionHuespedes.get(i)));
