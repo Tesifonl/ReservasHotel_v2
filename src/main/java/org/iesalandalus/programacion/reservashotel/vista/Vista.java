@@ -88,7 +88,7 @@ public class Vista {
 			String fecha2=Entrada.cadena();
 			LocalDate fechaFinReserva=Consola.leerFecha(fecha2);
 			
-			Habitacion habitacion = consultarDisponiblidad (tipoHabitacion,fechaInicioReserva,fechaFinReserva);
+			Habitacion habitacion = consultarDisponibilidad (tipoHabitacion,fechaInicioReserva,fechaFinReserva);
 			System.out.println(habitacion);
 		}	
 		
@@ -229,8 +229,17 @@ public class Vista {
 	}
 	
 	private void insertarReserva() {
-		try {
-			controlador.insertar(Consola.leerReserva());
+		try {	
+			Reserva nuevaReserva = Consola.leerReserva();
+
+			if (consultarDisponibilidad(nuevaReserva.getHabitacion().getTipoHabitacion(), 
+					                    nuevaReserva.getFechaInicioReserva(),
+					                    nuevaReserva.getFechaFinReserva()) != null){
+				controlador.insertar(nuevaReserva);
+			}
+			else {
+				System.out.println("No hay disponibilida para las fechas solicitadas en la reserva.");
+			}
 		}
 		catch(NullPointerException e){
 			System.out.println(e.getMessage());}
@@ -360,7 +369,7 @@ public class Vista {
 		}
 	}
 	
-	private Habitacion consultarDisponiblidad (TipoHabitacion tipoHabitacion, LocalDate fechaInicioReserva, LocalDate fechaFinReserva){
+	private Habitacion consultarDisponibilidad (TipoHabitacion tipoHabitacion, LocalDate fechaInicioReserva, LocalDate fechaFinReserva){
 		
 		ArrayList<Reserva> nuevoArray=controlador.getReservas(tipoHabitacion);
 		boolean habitacionesLibres=false;
@@ -394,7 +403,7 @@ public class Vista {
 	
 	
 	private void realizarChechin() {
-		ArrayList<Reserva> nuevoArray= controlador.getReservas(Consola.leerHuesped());
+		ArrayList<Reserva> nuevoArray= controlador.getReservas(Consola.getHuespedPorDni());
 		Reserva reservaCheck=null;
 		
 		int contador=0;
@@ -422,7 +431,7 @@ public class Vista {
 	}
 	
 	private void realizarChechout() {
-		ArrayList<Reserva> nuevoArray= controlador.getReservas(Consola.leerHuesped());
+		ArrayList<Reserva> nuevoArray= controlador.getReservas(Consola.getHuespedPorDni());
 		Reserva reservaCheck=null;
 		
 		int contador=0;

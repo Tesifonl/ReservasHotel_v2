@@ -45,7 +45,7 @@ public class Reservas {
 	}
 
 	public void insertar (Reserva reserva) throws OperationNotSupportedException {
-		
+
 		if(reserva!=null) {
 			if(coleccionReservas.contains(reserva)) {
 				throw new OperationNotSupportedException("ERROR: Ya existe una reserva igual.");

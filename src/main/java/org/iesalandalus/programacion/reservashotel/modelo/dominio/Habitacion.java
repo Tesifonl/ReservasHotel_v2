@@ -26,12 +26,11 @@ public class Habitacion implements Comparable<Habitacion>{
 		setIdentificador();
 	}
 	
-	public Habitacion (int planta,int puerta,double precio,String identificador,TipoHabitacion tipoHabitacion) {
+	public Habitacion (int planta,int puerta,double precio) {
 		setPlanta(planta);
 		setPuerta(puerta);
 		setPrecio(precio);
-		setIdentificador(identificador);
-		setTipoHabitacion(tipoHabitacion);
+		setIdentificador();
 	}
 	
 	public Habitacion (Habitacion habitacion) {
